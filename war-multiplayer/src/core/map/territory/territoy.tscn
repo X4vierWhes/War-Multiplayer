@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://6a4iugaea60h"]
+
+[ext_resource type="Script" uid="uid://cv3aisyr4xmd7" path="res://src/core/map/territory/territoy.gd" id="1_j25to"]
+[ext_resource type="Shader" uid="uid://cuxtvhhfbh5jm" path="res://src/core/shaders/color_changer.gdshader" id="2_d40dr"]
+[ext_resource type="Texture2D" uid="uid://bqqy6v631fbew" path="res://assets/territorys/basic_territory.png" id="3_7a7lq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d40dr"]
+shader = ExtResource("2_d40dr")
+shader_parameter/color_to_replace = Color(1, 1, 1, 1)
+shader_parameter/new_color = Color(0, 0, 1, 1)
+shader_parameter/tolerance = 1.0
+
+[node name="Territoy" type="Node2D" unique_id=1498767408 node_paths=PackedStringArray("territory_texture")]
+script = ExtResource("1_j25to")
+territory_texture = NodePath("CanvasLayer/TextureRect")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=927793303]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1998320718]
+texture_filter = 1
+material = SubResource("ShaderMaterial_d40dr")
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(3, 3)
+texture = ExtResource("3_7a7lq")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer" unique_id=588516174]
+offset_left = 32.000004
+offset_top = 37.0
+offset_right = 72.0
+offset_bottom = 77.0
+scale = Vector2(0.8481664, 0.55866396)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[wave freq=5.0 amp=50.0 conected=0] {text} [/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
