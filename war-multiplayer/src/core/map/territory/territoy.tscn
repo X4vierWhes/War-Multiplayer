@@ -10,9 +10,9 @@ shader_parameter/color_to_replace = Color(1, 1, 1, 1)
 shader_parameter/new_color = Color(0, 0, 1, 1)
 shader_parameter/tolerance = 1.0
 
-[node name="Territoy" type="Node2D" unique_id=1498767408 node_paths=PackedStringArray("territory_texture")]
+[node name="Territoy" type="Node2D" unique_id=1498767408 node_paths=PackedStringArray("texture")]
 script = ExtResource("1_j25to")
-territory_texture = NodePath("CanvasLayer/TextureRect")
+texture = NodePath("CanvasLayer/TextureRect")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=927793303]
 
@@ -35,3 +35,6 @@ bbcode_enabled = true
 text = "[wave freq=5.0 amp=50.0 conected=0] {text} [/wave]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="mouse_entered" from="CanvasLayer/TextureRect" to="." method="_on_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/TextureRect" to="." method="_on_texture_rect_mouse_exited"]
