@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://6a4iugaea60h"]
+
+[ext_resource type="Script" uid="uid://cv3aisyr4xmd7" path="res://src/core/map/territory/territory.gd" id="1_pvk8x"]
+[ext_resource type="Texture2D" uid="uid://bqqy6v631fbew" path="res://assets/territorys/basic_territory.png" id="3_34qhv"]
+
+[sub_resource type="Shader" id="Shader_wj243"]
+code = "shader_type canvas_item;
+
+uniform vec4 color_to_replace : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 new_color : source_color = vec4(0.0, 0.0, 1.0, 1.0);
+uniform float tolerance : hint_range(0.0, 1.0) = 0.05;
+
+void fragment() {
+	vec4 current_color = texture(TEXTURE, UV);
+	
+	float color_diff = distance(current_color.rgb, color_to_replace.rgb);
+	
+	if (color_diff <= tolerance) {
+		COLOR = vec4(new_color.rgb, current_color.a);
+	} else {
+		COLOR = current_color;
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d40dr"]
+shader = SubResource("Shader_wj243")
+shader_parameter/color_to_replace = Color(1, 1, 1, 1)
+shader_parameter/new_color = Color(0, 0, 1, 1)
+shader_parameter/tolerance = 1.0
+
+[node name="territory" type="Node2D" unique_id=1498767408 node_paths=PackedStringArray("texture")]
+script = ExtResource("1_pvk8x")
+texture = NodePath("TextureRect")
+color = Color(1, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1998320718]
+texture_filter = 1
+material = SubResource("ShaderMaterial_d40dr")
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(3, 3)
+texture = ExtResource("3_34qhv")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect" unique_id=588516174]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 3.666666
+offset_top = 2.000002
+offset_right = 43.666664
+offset_bottom = 42.0
+scale = Vector2(0.8481664, 0.55866396)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[wave freq=5.0 amp=50.0 conected=0] {text} [/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="TextureRect" unique_id=24642490]
+unique_name_in_owner = true
+top_level = true
+layout_mode = 0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 15.0
+offset_bottom = 16.0
+scale = Vector2(8, 8)
+flat = true
+
+[connection signal="mouse_entered" from="TextureRect/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect/Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_button_pressed"]
