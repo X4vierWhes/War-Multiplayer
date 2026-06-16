@@ -1,32 +1,14 @@
 [gd_scene format=3 uid="uid://6a4iugaea60h"]
 
+[ext_resource type="Shader" uid="uid://cuxtvhhfbh5jm" path="res://src/core/shaders/color_changer.gdshader" id="1_fcfk2"]
 [ext_resource type="Script" uid="uid://cv3aisyr4xmd7" path="res://src/core/map/territory/territory.gd" id="1_pvk8x"]
 [ext_resource type="Texture2D" uid="uid://bqqy6v631fbew" path="res://assets/territorys/basic_territory.png" id="3_34qhv"]
 
-[sub_resource type="Shader" id="Shader_wj243"]
-code = "shader_type canvas_item;
-
-uniform vec4 color_to_replace : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform vec4 new_color : source_color = vec4(0.0, 0.0, 1.0, 1.0);
-uniform float tolerance : hint_range(0.0, 1.0) = 0.05;
-
-void fragment() {
-	vec4 current_color = texture(TEXTURE, UV);
-	
-	float color_diff = distance(current_color.rgb, color_to_replace.rgb);
-	
-	if (color_diff <= tolerance) {
-		COLOR = vec4(new_color.rgb, current_color.a);
-	} else {
-		COLOR = current_color;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d40dr"]
-shader = SubResource("Shader_wj243")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pvk8x"]
+shader = ExtResource("1_fcfk2")
 shader_parameter/color_to_replace = Color(1, 1, 1, 1)
 shader_parameter/new_color = Color(0, 0, 1, 1)
-shader_parameter/tolerance = 1.0
+shader_parameter/tolerance = 0.05
 
 [node name="territory" type="Node2D" unique_id=1498767408 node_paths=PackedStringArray("texture")]
 script = ExtResource("1_pvk8x")
@@ -35,7 +17,7 @@ color = Color(1, 0, 0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1998320718]
 texture_filter = 1
-material = SubResource("ShaderMaterial_d40dr")
+material = SubResource("ShaderMaterial_pvk8x")
 offset_right = 32.0
 offset_bottom = 32.0
 scale = Vector2(3, 3)

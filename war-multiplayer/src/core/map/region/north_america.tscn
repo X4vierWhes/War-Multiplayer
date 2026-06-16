@@ -5,7 +5,7 @@
 
 [node name="NorthAmerica" type="Node2D" unique_id=1883663045 node_paths=PackedStringArray("territorys")]
 script = ExtResource("1_vaypf")
-territorys = [NodePath(""), NodePath("")]
+territorys = [null, null]
 
 [node name="territory" parent="." unique_id=1498767408 instance=ExtResource("2_o2kjc")]
 position = Vector2(237, 165)

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bvoaay7k85w3d" path="res://src/core/game.gd" id="1_yqd5c"]
 [ext_resource type="Script" uid="uid://l0gfcqe1tjjn" path="res://src/core/map_manager/map_manager.gd" id="2_rwa8d"]
+[ext_resource type="Script" uid="uid://do3qmpibggnk6" path="res://src/core/game_manager/game_manager.gd" id="3_ss3ij"]
 
 [node name="game" type="Node2D" unique_id=525332365]
 script = ExtResource("1_yqd5c")
@@ -9,6 +10,9 @@ players_colors = Array[Color]([Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(1, 1,
 
 [node name="map_manager" type="Node2D" parent="." unique_id=892306766]
 script = ExtResource("2_rwa8d")
+
+[node name="game_manager" type="Node2D" parent="." unique_id=2115965065]
+script = ExtResource("3_ss3ij")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=481796899]
 

@@ -19,6 +19,8 @@ const label_text: String = "[wave freq=5.0 amp=50.0 connected=0] {text} [/wave]"
 func _ready() -> void:
 	player_in_domain = Globals.player
 	texture_base_scale = texture.scale
+	if texture.material:
+		texture.material = texture.material.duplicate()
 	button.global_position = texture.global_position
 	_change_color(color)
 	_change_army_count(army_number)
@@ -37,17 +39,15 @@ func _take_action() -> void:
 		Globals.State.ATTACK:
 			print("Atacando")
 		Globals.State.MOBILIZING:
-			print("Mobilizando")
 			Globals.game_state = Globals.State.GIVE
 			Globals.action_territory = self
 			Globals.troops_to_mobilize = 1
 		Globals.State.GIVE:
-			print("Give")
 			if Globals.action_territory != self:
 				Globals.action_territory._change_army_count(-1)
 				_change_army_count(1)
+				Globals.action_territory = null
 				Globals.game_state = Globals.State.MOBILIZING
-
 
 func _change_army_count(amount: int) -> void:
 	army_number += amount
