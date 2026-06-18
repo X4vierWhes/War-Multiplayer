@@ -20,7 +20,7 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_pvk8x")
 offset_right = 32.0
 offset_bottom = 32.0
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 texture = ExtResource("3_34qhv")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="TextureRect" unique_id=588516174]
@@ -45,7 +45,7 @@ offset_left = 4.0
 offset_top = 5.0
 offset_right = 15.0
 offset_bottom = 16.0
-scale = Vector2(8, 8)
+scale = Vector2(5.2134833, 4.894118)
 flat = true
 
 [connection signal="mouse_entered" from="TextureRect/Button" to="." method="_on_button_mouse_entered"]

@@ -5,7 +5,9 @@ class_name UiManager
 var game_manager: GameManager = null
 
 func connect_signals(gm: GameManager) -> void:
-	pass
+	game_manager = gm
 
 func show_ui(state: GameManager.GameState) -> void:
-	pass
+	match(state):
+		GameManager.GameState.MOBILIZING:
+			return

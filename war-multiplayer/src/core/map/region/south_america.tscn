@@ -1,6 +1,21 @@
 [gd_scene format=3 uid="uid://o57pr8qm5vui"]
 
 [ext_resource type="Script" uid="uid://c60wrepqpjxc" path="res://src/core/map/region/region.gd" id="1_ibm6o"]
+[ext_resource type="PackedScene" uid="uid://6a4iugaea60h" path="res://src/core/map/territory/territory.tscn" id="2_ps0kk"]
 
 [node name="SouthAmerica" type="Node2D" unique_id=1506456131]
 script = ExtResource("1_ibm6o")
+region_name = "South_America"
+
+[node name="obj_brasil" parent="." unique_id=1498767408 instance=ExtResource("2_ps0kk")]
+position = Vector2(530, 288)
+
+[node name="obj_argentina" parent="." unique_id=245403461 instance=ExtResource("2_ps0kk")]
+position = Vector2(465, 351)
+
+[node name="obj_suriname" parent="." unique_id=124121561 instance=ExtResource("2_ps0kk")]
+position = Vector2(531, 222)
+color = Color(0, 0, 1, 1)
+
+[node name="obj_guiana" parent="." unique_id=1531504633 instance=ExtResource("2_ps0kk")]
+position = Vector2(601, 224)

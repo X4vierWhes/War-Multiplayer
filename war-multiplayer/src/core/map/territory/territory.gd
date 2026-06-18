@@ -11,14 +11,14 @@ class_name Territory
 @export var territory_name: String
 @export var army_number: int = 1
 
-var player_in_domain: Player
-var state:= Globals.game_state
+var player_in_domain: Player = null
+var gm: GameManager = null
 var texture_base_scale: Vector2
 const label_text: String = "[wave freq=5.0 amp=50.0 connected=0] {text} [/wave]"
 
 func _ready() -> void:
-	player_in_domain = Globals.player
 	texture_base_scale = texture.scale
+	player_in_domain = Globals.PLAYER
 	if texture.material:
 		texture.material = texture.material.duplicate()
 	button.global_position = texture.global_position
@@ -35,25 +35,38 @@ func _mobilize_troops(trops_to_mobilize: int, territory_to_mobilize: Territory) 
 	pass
 
 func mobilize() -> void:
-	Globals.game_state = Globals.State.GIVE
-	Globals.action_territory = self
-	Globals.troops_to_mobilize = 1
+	if army_number <= 1:
+		print("Tropas insuficientes")
+		gm.set_action(null)
+		gm.set_target(null)
+		return
+	
+	gm.set_action(self)
+	gm.change_game_state(GameManager.GameState.GIVE)
 
 func give() -> void:
-	if Globals.action_territory != self:
-			Globals.action_territory._change_army_count(-1)
-			_change_army_count(1)
-			Globals.action_territory = null
-			Globals.game_state = Globals.State.MOBILIZING
+	if gm.action_territory == self:
+		print("Não pode mobilizar para si proprio")
+		gm.set_action(null)
+		return
+	gm.set_target(self)
+	gm.show_ui()
+	gm.change_game_state(GameManager.GameState.AWAIT)
+	print("Aguarde...")
+	await gm.await_ui
 
 func _take_action() -> void:
-	match(Globals.game_state):
-		Globals.State.ATTACK:
+	match(gm.get_game_state()):
+		GameManager.GameState.ATTACK:
 			print("Atacando")
-		Globals.State.MOBILIZING:
+		GameManager.GameState.MOBILIZING:
 			mobilize()
-		Globals.State.GIVE:
+		GameManager.GameState.GIVE:
 			give()
+		GameManager.GameState.AWAIT:
+			return
+		GameManager.GameState.ATTACKING:
+			return
 
 func _change_army_count(amount: int) -> void:
 	army_number += amount

@@ -7,5 +7,10 @@ class_name Region
 @export var bonus: int = 1
 @export var territorys: Array[Territory] = []
 
+func set_game_manager(gm: GameManager, players: Array[Player]) -> void:
+	for i in get_children():
+		if i is Territory:
+			i.gm = gm
+
 func give_bonus() -> void:
 	pass

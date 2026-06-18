@@ -3,19 +3,30 @@
 [ext_resource type="Script" uid="uid://l0gfcqe1tjjn" path="res://src/core/map_manager/map_manager.gd" id="1_d4q8a"]
 [ext_resource type="Script" uid="uid://bvoaay7k85w3d" path="res://src/core/game_manager.gd" id="1_fx5eh"]
 [ext_resource type="Script" uid="uid://2ame7hnqpcom" path="res://src/ui/ui_manager.gd" id="2_gm6uy"]
+[ext_resource type="PackedScene" uid="uid://o57pr8qm5vui" path="res://src/core/map/region/south_america.tscn" id="3_km052"]
+[ext_resource type="Script" uid="uid://b5774o4rqrpao" path="res://src/core/turn_manager/turn_manager.gd" id="4_7y20v"]
 [ext_resource type="PackedScene" uid="uid://cfqnudytgfv0d" path="res://src/ui/AddTroops/AddTroopsInterface.tscn" id="4_km052"]
 [ext_resource type="PackedScene" uid="uid://boycooe6y6f8v" path="res://src/ui/MoveTroops/MoveTroopsInterface.tscn" id="5_7y20v"]
 [ext_resource type="PackedScene" uid="uid://bqsqpooeajfwl" path="res://src/ui/DeclareAttack/DeclareAttackInterface.tscn" id="6_ebxag"]
 
-[node name="game_manager" type="Node2D" unique_id=525332365]
+[node name="game_manager" type="Node2D" unique_id=525332365 node_paths=PackedStringArray("map_manager", "ui_manager")]
 script = ExtResource("1_fx5eh")
+map_manager = NodePath("map_manager")
+ui_manager = NodePath("CanvasLayer/ui_manager")
+players_colors = Array[Color]([Color(1, 0, 0, 1), Color(0, 0, 1, 1)])
 
 [node name="map_manager" type="Node2D" parent="." unique_id=892306766]
 script = ExtResource("1_d4q8a")
+maps = Array[PackedScene]([ExtResource("3_km052")])
+
+[node name="turn_manager" type="Node2D" parent="." unique_id=1871730817]
+script = ExtResource("4_7y20v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=481796899]
+layer = -1
 
 [node name="ui_manager" type="Control" parent="CanvasLayer" unique_id=1176088927]
+z_index = -1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
