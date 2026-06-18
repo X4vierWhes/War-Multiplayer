@@ -6,3 +6,6 @@ var game_manager: GameManager = null
 
 func connect_signals(gm: GameManager) -> void:
 	pass
+
+func show_ui(state: GameManager.GameState) -> void:
+	pass
