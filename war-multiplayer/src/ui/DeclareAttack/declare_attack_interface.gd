@@ -22,7 +22,7 @@ func _ready() -> void:
 	botao_adicionar.pressed.connect(_incrementar_contador)
 	botao_remover.pressed.connect(_decrementar_contador)
 	cancelar.pressed.connect(cancelar_acao.emit)
-	cancelar.pressed.connect(confirmar_acao.emit.bind(contador))
+	concluir.pressed.connect(confirmar_acao.emit.bind(contador))
 
 func _incrementar_contador() -> void:
 	if contador == territorio_origem.territorio.quant: return

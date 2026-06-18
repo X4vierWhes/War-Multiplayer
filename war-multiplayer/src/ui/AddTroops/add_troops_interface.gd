@@ -23,8 +23,8 @@ func _ready() -> void:
 	contador = 1
 	botao_adicionar.pressed.connect(_incrementar_contador)
 	botao_remover.pressed.connect(_decrementar_contador)
-	cancelar.pressed.connect(confirmar_acao.emit.bind(contador))
-	concluir.pressed.connect(cancelar_acao.emit)
+	concluir.pressed.connect(confirmar_acao.emit.bind(contador))
+	cancelar.pressed.connect(cancelar_acao.emit)
 
 func _incrementar_contador() -> void:
 	if contador == max_quantidade: return
