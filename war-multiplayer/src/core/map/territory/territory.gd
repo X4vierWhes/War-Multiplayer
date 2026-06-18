@@ -9,7 +9,10 @@ class_name Territory
 @export var color: Color = Color.WHITE
 @export var connected_regions: Array[Territory] = []
 @export var territory_name: String
-@export var army_number: int = 1
+@export var army_number: int = 0:
+	set(i):
+		if i <= 1: return
+		army_number = i
 
 var player_in_domain: Player = null
 var gm: GameManager = null
@@ -23,7 +26,7 @@ func _ready() -> void:
 		texture.material = texture.material.duplicate()
 	button.global_position = texture.global_position
 	_change_color(color)
-	_change_army_count(army_number)
+	_change_army_count(1)
 
 func _attack(territory_to_attack: Territory) -> void:
 	pass

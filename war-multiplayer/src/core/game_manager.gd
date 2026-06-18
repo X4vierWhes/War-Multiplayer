@@ -19,7 +19,7 @@ var target_territory: Territory
 @warning_ignore("unused_signal") signal await_ui
 
 func _ready() -> void:
-	
+	ui_manager.connect_signals(self)
 	map_manager.spawn_map(self, players)
 
 func give_card() -> void:
@@ -27,7 +27,9 @@ func give_card() -> void:
 	players[current_player].add_card(cardStack.pop_front())
 
 func show_ui() -> void:
-	pass
+	match(turn_manager.get_actual_state()):
+		TurnManager.Turn.MOBILIZE:
+			ui_manager.show_move_troops_ui()
 
 func change_game_state(new_state: GameState) -> void:
 	actual_state = new_state
@@ -43,5 +45,5 @@ func set_action(action: Territory) -> void:
 	action_territory = action
 
 func set_target(target: Territory) -> void:
-	print("GM Action_Territory:", target.name)
+	print("GM Target_Territory:", target.name)
 	target_territory = target
