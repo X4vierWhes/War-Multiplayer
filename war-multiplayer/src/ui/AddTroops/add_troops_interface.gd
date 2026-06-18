@@ -20,6 +20,9 @@ var contador:int:
 		if quantidade:
 			quantidade.text = str(i)
 
+func connect_signals(gm: GameManager) -> void:
+	pass
+
 func _ready() -> void:
 	contador = 1
 	botao_adicionar.pressed.connect(_incrementar_contador)

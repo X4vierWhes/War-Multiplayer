@@ -7,23 +7,27 @@
 script = ExtResource("1_ibm6o")
 region_name = "South_America"
 
-[node name="obj_brasil" parent="." unique_id=1498767408 instance=ExtResource("2_ps0kk")]
+[node name="obj_brasil" parent="." unique_id=1498767408 node_paths=PackedStringArray("connected_regions") instance=ExtResource("2_ps0kk")]
 position = Vector2(530, 288)
-territory_name = null
+connected_regions = [NodePath("../obj_argentina"), NodePath("../obj_suriname"), NodePath("../obj_guiana")]
+territory_name = "Brasil"
 army_number = 5
 
-[node name="obj_argentina" parent="." unique_id=245403461 instance=ExtResource("2_ps0kk")]
+[node name="obj_argentina" parent="." unique_id=245403461 node_paths=PackedStringArray("connected_regions") instance=ExtResource("2_ps0kk")]
 position = Vector2(465, 351)
-territory_name = null
+connected_regions = [NodePath("../obj_brasil")]
+territory_name = "Argentina"
 army_number = 2
 
-[node name="obj_suriname" parent="." unique_id=124121561 instance=ExtResource("2_ps0kk")]
+[node name="obj_suriname" parent="." unique_id=124121561 node_paths=PackedStringArray("connected_regions") instance=ExtResource("2_ps0kk")]
 position = Vector2(531, 222)
 color = Color(0, 0, 1, 1)
-territory_name = null
+connected_regions = [NodePath("../obj_brasil"), NodePath("../obj_guiana")]
+territory_name = "Suriname"
 army_number = 7
 
-[node name="obj_guiana" parent="." unique_id=1531504633 instance=ExtResource("2_ps0kk")]
+[node name="obj_guiana" parent="." unique_id=1531504633 node_paths=PackedStringArray("connected_regions") instance=ExtResource("2_ps0kk")]
 position = Vector2(601, 224)
-territory_name = null
+connected_regions = [NodePath("../obj_suriname"), NodePath("../obj_brasil")]
+territory_name = "Guiana"
 army_number = 10

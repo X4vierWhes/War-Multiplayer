@@ -40,7 +40,6 @@ func mobilize() -> void:
 		gm.set_action(null)
 		gm.set_target(null)
 		return
-	
 	gm.set_action(self)
 	gm.change_game_state(GameManager.GameState.GIVE)
 
@@ -48,6 +47,9 @@ func give() -> void:
 	if gm.action_territory == self:
 		print("Não pode mobilizar para si proprio")
 		gm.set_action(null)
+		return
+	if gm.action_territory not in connected_regions:
+		print("Não conectado")
 		return
 	gm.set_target(self)
 	gm.show_ui()
