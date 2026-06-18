@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @RestController
 @RequestMapping("/keymanager")
 public class KeyManagerController {
@@ -37,7 +39,8 @@ public class KeyManagerController {
     }
 
     @PostMapping("/key")
-    public HttpStatus registerKey(@RequestParam String userId, @RequestParam String publicKey) {
-        return keyManagerService.registerKey(userId, publicKey) ? HttpStatus.CREATED : HttpStatus.CONFLICT;
+    public HttpStatus registerKey(@RequestBody HashMap<String, String> request) {
+        System.out.println("Registering key for userId: " + request.get("userId") + ", publicKey: " + request.get("publicKey"));
+        return keyManagerService.registerKey(request.get("userId"), request.get("publicKey")) ? HttpStatus.CREATED : HttpStatus.CONFLICT;
     }
 }
