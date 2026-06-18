@@ -25,6 +25,9 @@ func _ready() -> void:
 	cancelar.pressed.connect(cancelar_acao.emit)
 	concluir.pressed.connect(confirmar_acao.emit.bind(contador))
 
+func connect_signals(gm: GameManager) -> void:
+	pass
+
 func _incrementar_contador() -> void:
 	if contador == territorio_origem.territorio.quant: return
 	contador += 1

@@ -15,7 +15,7 @@ class_name MoveTroops
 var territorio_origem: Territory
 var territorio_destino: Territory
 
-var contador:int = 1:
+var contador:int = 0:
 	set(i):
 		contador = i
 		if quantidade:
@@ -27,20 +27,25 @@ func _ready() -> void:
 	cancelar.pressed.connect(_cancelar)
 	concluir.pressed.connect(_concluir)
 
+func connect_signals(gm: GameManager) -> void:
+	confirmar_acao.connect(gm.realize_mobilizing_troops)
+	cancelar_acao.connect(gm.refresh_game_state)
+
 func _incrementar_contador() -> void:
-	if contador == territorio_origem.army_number: return
+	if contador == territorio_origem.army_number - 1: return
 	contador += 1
-	territorio_origem._change_army_count(-1)
-	territorio_destino._change_army_count(1)
+	#territorio_origem._change_army_count(-1)
+	#territorio_destino._change_army_count(1)
 
 func _decrementar_contador() -> void:
 	if contador == 1: return
 	contador -= 1
-	territorio_origem._change_army_count(1)
-	territorio_destino._change_army_count(-1)
+	#territorio_origem._change_army_count(1)
+	#territorio_destino._change_army_count(-1)
 
 func _concluir() -> void:
-	pass
+	confirmar_acao.emit(contador)
+	contador = 0
 
 func _cancelar() -> void:
 	pass
