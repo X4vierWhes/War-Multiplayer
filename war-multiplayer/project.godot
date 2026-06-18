@@ -26,6 +26,7 @@ folder_colors={
 "res://src/components/": "blue",
 "res://src/core/": "red",
 "res://src/globals/": "purple",
+"res://src/ui/": "orange",
 "res://ui/": "orange"
 }
 
