@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bqsqpooeajfwl"]
+
+[ext_resource type="Script" uid="uid://l0s5ojo53ux8" path="res://src/ui/DeclareAttack/declare_attack_interface.gd" id="1_aybj7"]
+
+[node name="DeclareAttackInterface" type="Control" unique_id=522357982]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aybj7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1105598797]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="cancelar" type="Button" parent="HBoxContainer" unique_id=1008719983]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "x
+"
+
+[node name="BotaoRemover" type="Button" parent="HBoxContainer" unique_id=429856773]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "<"
+
+[node name="quantidade" type="Label" parent="HBoxContainer" unique_id=1742594532]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(19, 23)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "99"
+
+[node name="BotaoAdicionar" type="Button" parent="HBoxContainer" unique_id=1572700748]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = ">"
+
+[node name="concluir" type="Button" parent="HBoxContainer" unique_id=499379941]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "✓"

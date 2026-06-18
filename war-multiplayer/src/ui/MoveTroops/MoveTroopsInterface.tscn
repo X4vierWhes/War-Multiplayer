@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://boycooe6y6f8v"]
+
+[ext_resource type="Script" uid="uid://dffn00l57p428" path="res://src/ui/MoveTroops/move_troops_interface.gd" id="1_s6p66"]
+
+[node name="MoveTroopsInterface" type="Control" unique_id=1563448935]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_s6p66")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=540767714]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -31.0
+offset_right = 34.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="cancelar" type="Button" parent="HBoxContainer" unique_id=1539929381]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "x
+"
+
+[node name="texto" type="Label" parent="HBoxContainer" unique_id=414081612]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "de: "
+
+[node name="BotaoRemover" type="Button" parent="HBoxContainer" unique_id=1592320445]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "<"
+
+[node name="quantidade" type="Label" parent="HBoxContainer" unique_id=1267592632]
+unique_name_in_owner = true
+layout_mode = 2
+text = "99"
+
+[node name="BotaoAdicionar" type="Button" parent="HBoxContainer" unique_id=1877888823]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = ">"
+
+[node name="texto2" type="Label" parent="HBoxContainer" unique_id=192038094]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "para: "
+
+[node name="concluir" type="Button" parent="HBoxContainer" unique_id=871357708]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "✓"
