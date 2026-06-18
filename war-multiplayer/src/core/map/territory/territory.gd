@@ -9,10 +9,7 @@ class_name Territory
 @export var color: Color = Color.WHITE
 @export var connected_regions: Array[Territory] = []
 @export var territory_name: String
-@export var army_number: int = 0:
-	set(i):
-		if i <= 1: return
-		army_number = i
+@export var army_number: int = 0
 
 var player_in_domain: Player = null
 var gm: GameManager = null
@@ -72,6 +69,9 @@ func _take_action() -> void:
 			return
 
 func _change_army_count(amount: int) -> void:
+	var aux: int = army_number + amount
+	if aux < 1:
+		return
 	army_number += amount
 	rich_text_label.text = label_text.replace("{text}", str(army_number))
 
