@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://degn8gouiakid"]
+
+[ext_resource type="Script" uid="uid://l0gfcqe1tjjn" path="res://src/core/map_manager/map_manager.gd" id="1_d4q8a"]
+[ext_resource type="Script" uid="uid://2ame7hnqpcom" path="res://src/ui/ui_manager.gd" id="2_gm6uy"]
+
+[sub_resource type="GDScript" id="GDScript_p8uu6"]
+script/source = "extends Node2D
+class_name GameManager
+
+@export var players: int = 1
+@export var players_colors: Array[Color] = []
+"
+
+[node name="game_manager" type="Node2D" unique_id=525332365]
+script = SubResource("GDScript_p8uu6")
+players = null
+players_colors = null
+
+[node name="map_manager" type="Node2D" parent="." unique_id=892306766]
+script = ExtResource("1_d4q8a")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=481796899]
+
+[node name="ui_manager" type="Control" parent="CanvasLayer" unique_id=1176088927]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_gm6uy")

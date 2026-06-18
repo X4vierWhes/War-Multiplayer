@@ -1,4 +1,5 @@
 extends Control
+class_name AddTroops
 
 signal confirmar_acao(quant: int)
 signal cancelar_acao

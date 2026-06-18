@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://o57pr8qm5vui"]
+
+[ext_resource type="Script" uid="uid://c60wrepqpjxc" path="res://src/core/map/region/region.gd" id="1_ibm6o"]
+
+[node name="SouthAmerica" type="Node2D" unique_id=1506456131]
+script = ExtResource("1_ibm6o")

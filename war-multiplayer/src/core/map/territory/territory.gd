@@ -34,20 +34,26 @@ func defend() -> void:
 func _mobilize_troops(trops_to_mobilize: int, territory_to_mobilize: Territory) -> void:
 	pass
 
+func mobilize() -> void:
+	Globals.game_state = Globals.State.GIVE
+	Globals.action_territory = self
+	Globals.troops_to_mobilize = 1
+
+func give() -> void:
+	if Globals.action_territory != self:
+			Globals.action_territory._change_army_count(-1)
+			_change_army_count(1)
+			Globals.action_territory = null
+			Globals.game_state = Globals.State.MOBILIZING
+
 func _take_action() -> void:
 	match(Globals.game_state):
 		Globals.State.ATTACK:
 			print("Atacando")
 		Globals.State.MOBILIZING:
-			Globals.game_state = Globals.State.GIVE
-			Globals.action_territory = self
-			Globals.troops_to_mobilize = 1
+			mobilize()
 		Globals.State.GIVE:
-			if Globals.action_territory != self:
-				Globals.action_territory._change_army_count(-1)
-				_change_army_count(1)
-				Globals.action_territory = null
-				Globals.game_state = Globals.State.MOBILIZING
+			give()
 
 func _change_army_count(amount: int) -> void:
 	army_number += amount

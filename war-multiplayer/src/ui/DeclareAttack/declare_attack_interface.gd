@@ -1,4 +1,5 @@
 extends Control
+class_name DeclareAttack
 
 signal confirmar_acao(quant: int)
 signal cancelar_acao
