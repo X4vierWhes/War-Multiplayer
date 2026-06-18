@@ -12,11 +12,15 @@ public class KeyManagerService {
         keyStore = new ConcurrentHashMap<>();
     }
 
-    public void registerKey(String userId, String publicKey) {
+    public boolean registerKey(String userId, String publicKey) {
         if (userId.isEmpty() || publicKey.isEmpty()) {
             throw new IllegalArgumentException("User ID and public key must not be empty");
         }
+        if (keyStore.containsKey(userId)) {
+            return false; // User ID already exists
+        }
         keyStore.put(userId, publicKey);
+        return true;
     }
 
     public String getKey(String userId) {
