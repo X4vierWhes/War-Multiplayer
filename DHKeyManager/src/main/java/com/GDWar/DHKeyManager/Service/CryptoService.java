@@ -17,8 +17,8 @@ public class CryptoService {
         privateKey = keyPair.getPrivate();
     }
 
-    public PublicKey getPublicKey() {
-        return publicKey;
+    public String getPublicKey() {
+        return bytesToHex(publicKey.getEncoded());
     }
 
     public String signPublicKey(String message) {
