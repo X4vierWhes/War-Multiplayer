@@ -9,7 +9,8 @@ class_name GameManager
 enum GameState{
 	ATTACK = 0, 
 	MOBILIZING = 1, 
-	AWAIT = 2, 
+	AWAIT = 2,
+	ADD = 3, 
 	GIVE, 
 	ATTACKING
 	}
@@ -27,6 +28,10 @@ var target_territory: Territory
 func _ready() -> void:
 	ui_manager.connect_signals(self)
 	map_manager.spawn_map(self, players)
+	turn_manager.turn_changed.connect(on_turn_changed)
+
+func on_turn_changed() -> void:
+	pass
 
 func give_card() -> void:
 	if cardStack.size() == 0: return 

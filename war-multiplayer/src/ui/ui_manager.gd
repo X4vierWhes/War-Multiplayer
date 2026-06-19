@@ -45,5 +45,13 @@ func hide_ui() -> void:
 func change_turn() -> void:
 	state_label.text = state_label_text.replace("{Game State}", turn_manager.label_state())
 
-func step_progress_bar() -> void:
-	pass
+func set_progress_bar_params(max_value: float, step: float = 10) -> void:
+	turn_progress_bar.max_value = max_value * step
+	turn_progress_bar.min_value = 0.0
+	turn_progress_bar.value = max_value * step
+
+func step_progress_bar(step: float = 10) -> bool:
+	turn_progress_bar.value -= step
+	if turn_progress_bar.value > 0:
+		return true
+	return false

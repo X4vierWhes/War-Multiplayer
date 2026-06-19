@@ -20,10 +20,6 @@ players_colors = Array[Color]([Color(1, 0, 0, 1), Color(0, 0, 1, 1)])
 script = ExtResource("1_d4q8a")
 maps = Array[PackedScene]([ExtResource("3_km052")])
 
-[node name="turn_manager" type="Node2D" parent="." unique_id=1871730817]
-script = ExtResource("4_7y20v")
-turn_timer = 45.0
-
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=481796899]
 layer = -1
 
@@ -47,6 +43,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 27.0
 grow_horizontal = 2
+value = 100.0
 
 [node name="state_label" type="RichTextLabel" parent="CanvasLayer/ui_manager" unique_id=1409418035]
 layout_mode = 1
@@ -74,3 +71,7 @@ layout_mode = 1
 [node name="DeclareAttackInterface" parent="CanvasLayer/ui_manager" unique_id=522357982 instance=ExtResource("6_ebxag")]
 visible = false
 layout_mode = 1
+
+[node name="turn_manager" type="Node2D" parent="." unique_id=1871730817 node_paths=PackedStringArray("ui_manager")]
+script = ExtResource("4_7y20v")
+ui_manager = NodePath("../CanvasLayer/ui_manager")
