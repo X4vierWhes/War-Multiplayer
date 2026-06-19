@@ -22,11 +22,12 @@ maps = Array[PackedScene]([ExtResource("3_km052")])
 
 [node name="turn_manager" type="Node2D" parent="." unique_id=1871730817]
 script = ExtResource("4_7y20v")
+turn_timer = 45.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=481796899]
 layer = -1
 
-[node name="ui_manager" type="Control" parent="CanvasLayer" unique_id=1176088927 node_paths=PackedStringArray("add_troops", "move_troops", "declare_attack")]
+[node name="ui_manager" type="Control" parent="CanvasLayer" unique_id=1176088927 node_paths=PackedStringArray("turn_manager", "add_troops", "move_troops", "declare_attack")]
 z_index = -1
 layout_mode = 3
 anchors_preset = 15
@@ -35,6 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_gm6uy")
+turn_manager = NodePath("../../turn_manager")
 add_troops = NodePath("AddTroopsInterface")
 move_troops = NodePath("MoveTroopsInterface")
 declare_attack = NodePath("DeclareAttackInterface")
@@ -57,7 +59,7 @@ offset_right = 63.0
 offset_bottom = 69.0
 grow_horizontal = 2
 bbcode_enabled = true
-text = "{Game State}"
+text = "[wave connected=0]{Game State}[/wave]"
 horizontal_alignment = 1
 vertical_alignment = 1
 

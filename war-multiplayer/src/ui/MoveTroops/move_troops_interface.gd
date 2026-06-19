@@ -34,18 +34,15 @@ func connect_signals(gm: GameManager) -> void:
 func _incrementar_contador() -> void:
 	if contador == territorio_origem.army_number - 1: return
 	contador += 1
-	#territorio_origem._change_army_count(-1)
-	#territorio_destino._change_army_count(1)
 
 func _decrementar_contador() -> void:
 	if contador == 1: return
 	contador -= 1
-	#territorio_origem._change_army_count(1)
-	#territorio_destino._change_army_count(-1)
 
 func _concluir() -> void:
 	confirmar_acao.emit(contador)
 	contador = 0
 
 func _cancelar() -> void:
-	pass
+	cancelar_acao.emit()
+	contador = 0

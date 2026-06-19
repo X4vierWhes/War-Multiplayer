@@ -10,7 +10,7 @@ shader_parameter/color_to_replace = Color(1, 1, 1, 1)
 shader_parameter/new_color = Color(0, 0, 1, 1)
 shader_parameter/tolerance = 0.05
 
-[node name="territory" type="Node2D" unique_id=1498767408 node_paths=PackedStringArray("texture")]
+[node name="territory" type="Node2D" unique_id=1498767408 node_paths=PackedStringArray("texture") groups=["Territorys"]]
 script = ExtResource("1_pvk8x")
 texture = NodePath("TextureRect")
 color = Color(1, 0, 0, 1)

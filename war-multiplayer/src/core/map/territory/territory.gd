@@ -25,15 +25,6 @@ func _ready() -> void:
 	_change_color(color)
 	_change_army_count(1)
 
-func _attack(territory_to_attack: Territory) -> void:
-	pass
-
-func defend() -> void:
-	pass
-
-func _mobilize_troops(trops_to_mobilize: int, territory_to_mobilize: Territory) -> void:
-	pass
-
 func mobilize() -> void:
 	if army_number <= 1:
 		print("Tropas insuficientes")
@@ -56,6 +47,9 @@ func give() -> void:
 	gm.change_game_state(GameManager.GameState.AWAIT)
 	print("Aguarde...")
 	await gm.await_ui
+
+func attack() -> void:
+	pass
 
 func _take_action() -> void:
 	match(gm.get_game_state()):
