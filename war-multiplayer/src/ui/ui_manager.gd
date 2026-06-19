@@ -9,6 +9,7 @@ class_name UiManager
 
 var game_manager: GameManager = null
 
+@onready var add_label: RichTextLabel = $add_label
 @onready var state_label: RichTextLabel = $state_label
 @onready var turn_progress_bar: ProgressBar = $turn_progress_bar
 
@@ -32,7 +33,8 @@ func show_move_troops_ui() -> void:
 	await game_manager.await_ui
 	move_troops.hide()
 
-func show_add_troops_ui() -> void:
+func show_add_troops_ui(_player_request: Player) -> void:
+	add_label.text = adding_label_text.replace("{amount}", str(_player_request.adding_troops))
 	add_troops.show()
 	await game_manager.await_ui
 	add_troops.hide()

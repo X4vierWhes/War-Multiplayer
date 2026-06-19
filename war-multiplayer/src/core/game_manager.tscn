@@ -14,7 +14,6 @@ script = ExtResource("1_fx5eh")
 map_manager = NodePath("map_manager")
 ui_manager = NodePath("CanvasLayer/ui_manager")
 turn_manager = NodePath("turn_manager")
-players_colors = Array[Color]([Color(1, 0, 0, 1), Color(0, 0, 1, 1)])
 
 [node name="map_manager" type="Node2D" parent="." unique_id=892306766 node_paths=PackedStringArray("turn_manager")]
 script = ExtResource("1_d4q8a")

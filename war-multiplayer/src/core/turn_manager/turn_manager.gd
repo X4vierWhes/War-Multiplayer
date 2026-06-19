@@ -4,6 +4,7 @@ class_name TurnManager
 @export var ui_manager: UiManager
 
 @warning_ignore("unused_signal") signal turn_changed
+@warning_ignore("unused_signal") signal turn_init
 #enum GameState{ADD = 0, ATTACK = 1, ADD = 2, AWAIT = 3, MOBILIZING, ATTACKING, ADDING}
 enum TurnState{
 	ADD = 0,
@@ -15,10 +16,8 @@ var actual_state: int = TurnState.ADD
 var turn_timer: Timer
 @export_range(1.0, 180.0, 0.1) var timer = 45.0
 
-func _ready() -> void:
-	init_timers()
-
 func init_timers() -> void:
+	turn_init.emit()
 	ui_manager.set_progress_bar_params(timer)
 	turn_timer = Timer.new()
 	turn_timer.wait_time = 1.0
@@ -52,6 +51,7 @@ func get_actual_state() -> int:
 
 func set_actual_state(state: int) -> void:
 	actual_state = state
+	init_timers()
 
 func label_state() -> String:
 	match(actual_state):

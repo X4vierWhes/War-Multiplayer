@@ -18,7 +18,7 @@ const label_text: String = "[wave freq=5.0 amp=50.0 connected=0] {text} [/wave]"
 
 func _ready() -> void:
 	texture_base_scale = texture.scale
-	_connect_player() #Territorios so vão iniciar depois de tudo
+	#_connect_player() #Territorios so vão iniciar depois de tudo
 	if texture.material:
 		texture.material = texture.material.duplicate()
 	button.global_position = texture.global_position
@@ -33,6 +33,7 @@ func _connect_player() -> void: #TODO CONEXÃO COM O SERVIDOR QUE VAI RETORNAR O
 	player_in_domain = Globals.PLAYER_SCENE.instantiate() as Player
 
 func add() -> void:
+	print("Adicionando")
 	pass
 
 func adding() -> void:
@@ -76,6 +77,7 @@ func check_domain() -> bool:
 	return false
 
 func _take_action() -> void:
+	print("Player que domina:", str(player_in_domain.color))
 	match(gm.get_game_state()):
 		GameManager.GameState.ATTACK:
 			if check_domain():
@@ -97,7 +99,8 @@ func _take_action() -> void:
 				adding()
 		GameManager.GameState.AWAIT:
 			awaiting()
-
+		_:
+			print("Desconhecido")
 
 func _change_army_count(amount: int) -> void:
 	var aux: int = army_number + amount

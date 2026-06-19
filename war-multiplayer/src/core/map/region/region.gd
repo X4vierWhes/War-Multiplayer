@@ -8,9 +8,9 @@ class_name Region
 @export var territorys: Array[Territory] = []
 
 func set_game_manager(gm: GameManager, players: Array[Player]) -> void:
-	for i in get_children():
-		if i is Territory:
-			i.gm = gm
+	for t in get_children():
+		if t is Territory:
+			t.set_gm(gm)
 
 func get_troops_to_add(player_request: Player) -> int:
 	var troops: int = 0

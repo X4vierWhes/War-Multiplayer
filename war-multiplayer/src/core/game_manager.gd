@@ -4,7 +4,6 @@ class_name GameManager
 @export var map_manager: MapManager
 @export var ui_manager: UiManager
 @export var turn_manager: TurnManager
-@export var players_colors: Array[Color]
 
 enum GameState{
 	ADD = 0, 
@@ -20,6 +19,7 @@ var actual_state: GameState = GameState.ADD
 var players: Array[Player] = []
 var player_in_turn: Player = null
 var current_player: int = 0
+
 var cardStack: Array[Card]
 
 var action_territory: Territory
@@ -29,10 +29,29 @@ var target_territory: Territory
 
 func _ready() -> void:
 	connect_players()
-	choose_players_turn()
 	ui_manager.connect_signals(self)
 	map_manager.spawn_map(self, players)
 	turn_manager.turn_changed.connect(on_turn_changed)
+	turn_manager.turn_init.connect(on_turn_init)
+	turn_manager.set_actual_state(actual_state)
+	game_loop()
+
+func game_loop() -> void:
+	pass
+
+func on_turn_changed() -> void:
+	actual_state = turn_manager.get_actual_state()
+	print(GameState.keys()[actual_state])
+
+func on_turn_init() -> void:
+	print("Turno iniciou")
+	print(GameState.keys()[actual_state])
+	if turn_manager.get_actual_state() == TurnManager.TurnState.ADD:
+		calc_add_troops_to_player()
+
+func calc_add_troops_to_player() -> void:
+	print("Calculando tropas para adicionar na GAME MANAGER")
+	pass
 
 func connect_players() -> void:
 	#TODO RECEBER CONEXÕES DE PLAYERS
@@ -40,9 +59,11 @@ func connect_players() -> void:
 		var new_player: Player = Globals.PLAYER_SCENE.instantiate() as Player
 		new_player.color = Globals.TERRITORY_COLORS.get(i)
 		players.append(new_player)
+	
+	players.shuffle()
 
-func choose_players_turn() -> void:
-	#TODO SHUFFLE PLAYERS TURNS
+func get_player_in_turn() -> void:
+	
 	pass
 
 func get_player_by_color(color: Color) -> Player:
@@ -51,10 +72,6 @@ func get_player_by_color(color: Color) -> Player:
 			return i
 	return null
 
-func on_turn_changed() -> void:
-	actual_state = turn_manager.get_actual_state()
-	print(GameState.keys()[actual_state])
-
 func give_card() -> void:
 	if cardStack.size() == 0: return 
 	players[current_player].add_card(cardStack.pop_front())
@@ -62,12 +79,12 @@ func give_card() -> void:
 func get_add_troops(player_request: Player) -> int:
 	return map_manager.get_add_troops(player_request)
 
-func show_ui() -> void:
+func show_ui(_player_request: Player = null) -> void:
 	match(turn_manager.get_actual_state()):
 		TurnManager.TurnState.MOBILIZE:
 			ui_manager.show_move_troops_ui()
 		TurnManager.TurnState.ADD:
-			ui_manager.show_add_troops_ui()
+			ui_manager.show_add_troops_ui(_player_request)
 
 func change_game_state(new_state: GameState) -> void:
 	actual_state = new_state
@@ -76,8 +93,6 @@ func get_game_state() -> GameState:
 	return actual_state
 
 func refresh_game_state() -> void:
-	#action_territory = null
-	#target_territory = null
 	if await_ui.has_connections():
 		await_ui.emit()
 	actual_state = turn_manager.get_actual_state()
