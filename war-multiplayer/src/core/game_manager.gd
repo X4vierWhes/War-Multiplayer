@@ -17,7 +17,8 @@ enum GameState{
 	}
 var actual_state: GameState = GameState.ADD
 
-var players: Array[Player]
+var players: Array[Player] = []
+var player_in_turn: Player = null
 var current_player: int = 0
 var cardStack: Array[Card]
 
@@ -27,9 +28,28 @@ var target_territory: Territory
 @warning_ignore("unused_signal") signal await_ui
 
 func _ready() -> void:
+	connect_players()
+	choose_players_turn()
 	ui_manager.connect_signals(self)
 	map_manager.spawn_map(self, players)
 	turn_manager.turn_changed.connect(on_turn_changed)
+
+func connect_players() -> void:
+	#TODO RECEBER CONEXÕES DE PLAYERS
+	for i in range(6):
+		var new_player: Player = Globals.PLAYER_SCENE.instantiate() as Player
+		new_player.color = Globals.TERRITORY_COLORS.get(i)
+		players.append(new_player)
+
+func choose_players_turn() -> void:
+	#TODO SHUFFLE PLAYERS TURNS
+	pass
+
+func get_player_by_color(color: Color) -> Player:
+	for i in players:
+		if i.color == color:
+			return i
+	return null
 
 func on_turn_changed() -> void:
 	actual_state = turn_manager.get_actual_state()
@@ -38,6 +58,9 @@ func on_turn_changed() -> void:
 func give_card() -> void:
 	if cardStack.size() == 0: return 
 	players[current_player].add_card(cardStack.pop_front())
+
+func get_add_troops(player_request: Player) -> int:
+	return map_manager.get_add_troops(player_request)
 
 func show_ui() -> void:
 	match(turn_manager.get_actual_state()):

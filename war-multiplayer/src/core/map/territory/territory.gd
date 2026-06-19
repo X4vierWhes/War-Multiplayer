@@ -18,12 +18,31 @@ const label_text: String = "[wave freq=5.0 amp=50.0 connected=0] {text} [/wave]"
 
 func _ready() -> void:
 	texture_base_scale = texture.scale
-	player_in_domain = Globals.PLAYER
+	_connect_player() #Territorios so vão iniciar depois de tudo
 	if texture.material:
 		texture.material = texture.material.duplicate()
 	button.global_position = texture.global_position
 	_change_color(color)
 	_change_army_count(1)
+
+func set_gm(game_manager: GameManager) -> void:
+	gm = game_manager
+	player_in_domain = gm.get_player_by_color(color)
+
+func _connect_player() -> void: #TODO CONEXÃO COM O SERVIDOR QUE VAI RETORNAR O PLAYER.
+	player_in_domain = Globals.PLAYER_SCENE.instantiate() as Player
+
+func add() -> void:
+	pass
+
+func adding() -> void:
+	pass
+
+func attack() -> void:
+	pass
+
+func attacking() -> void:
+	pass
 
 func mobilize() -> void:
 	if army_number <= 1:
@@ -48,35 +67,34 @@ func mobilizing() -> void:
 	print("Aguarde...")
 	await gm.await_ui
 
-func attack() -> void:
-	pass
-
-func attacking() -> void:
-	pass
-
-func add() -> void:
-	pass
-
-func adding() -> void:
-	pass
-
 func awaiting() -> void:
 	pass
+
+func check_domain() -> bool:
+	if player_in_domain.color == color:
+		return true
+	return false
 
 func _take_action() -> void:
 	match(gm.get_game_state()):
 		GameManager.GameState.ATTACK:
-			attack()
+			if check_domain():
+				attack()
 		GameManager.GameState.ATTACKING:
-			attacking()
+			if !check_domain():
+				attacking()
 		GameManager.GameState.MOBILIZE:
-			mobilize()
+			if check_domain():
+				mobilize()
 		GameManager.GameState.MOBILIZING:
-			mobilizing()
+			if check_domain():
+				mobilizing()
 		GameManager.GameState.ADD:
-			add()
+			if check_domain():
+				add()
 		GameManager.GameState.ADDING:
-			adding()
+			if check_domain():
+				adding()
 		GameManager.GameState.AWAIT:
 			awaiting()
 
@@ -94,10 +112,7 @@ func _change_color(new_color: Color) -> void:
 		shader_material.set_shader_parameter("new_color", new_color)
 
 func _on_button_pressed() -> void:
-	if player_in_domain.color == color:
-		_take_action()
-	else:
-		print("Not in domain")
+	_take_action()
 
 func _on_button_mouse_entered() -> void:
 	if player_in_domain.color == color:
