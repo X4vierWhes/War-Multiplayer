@@ -32,7 +32,7 @@ func mobilize() -> void:
 		gm.set_target(null)
 		return
 	gm.set_action(self)
-	gm.change_game_state(GameManager.GameState.GIVE)
+	gm.change_game_state(GameManager.GameState.MOBILIZING)
 
 func give() -> void:
 	if gm.action_territory == self:
@@ -55,10 +55,14 @@ func _take_action() -> void:
 	match(gm.get_game_state()):
 		GameManager.GameState.ATTACK:
 			print("Atacando")
-		GameManager.GameState.MOBILIZING:
+		GameManager.GameState.MOBILIZE:
 			mobilize()
-		GameManager.GameState.GIVE:
+		GameManager.GameState.MOBILIZING:
 			give()
+		GameManager.GameState.ADD:
+			return
+		GameManager.GameState.ADDING:
+			return
 		GameManager.GameState.AWAIT:
 			return
 		GameManager.GameState.ATTACKING:

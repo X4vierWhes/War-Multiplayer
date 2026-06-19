@@ -4,14 +4,14 @@ class_name TurnManager
 @export var ui_manager: UiManager
 
 @warning_ignore("unused_signal") signal turn_changed
-#enum GameState{ATTACK, MOBILIZING, AWAIT, ADD, GIVE, ATTACKING}
+#enum GameState{ADD = 0, ATTACK = 1, ADD = 2, AWAIT = 3, MOBILIZING, ATTACKING, ADDING}
 enum TurnState{
-	ATTACK = 0,
-	MOBILIZING = 1,
-	AWAIT = 2,
-	ADD = 3
+	ADD = 0,
+	ATTACK = 1,
+	MOBILIZE = 2,
+	AWAIT = 3
 }
-var actual_state: int = TurnState.MOBILIZING
+var actual_state: int = TurnState.MOBILIZE
 var turn_timer: Timer
 @export_range(1.0, 180.0, 0.1) var timer = 45.0
 
@@ -27,11 +27,18 @@ func init_timers() -> void:
 	turn_timer.start()
 
 func on_turn_timer_timeout() -> void:
-	#TODO Mudança de turnos
 	if !ui_manager.step_progress_bar():
 		print("Turno acabou")
 		turn_timer.stop()
-		pass
+		change_turn()
+
+func change_turn() -> void:
+	#TODO Mudança de turno
+	print("Mudando turno")
+	var next_state_value = (int(actual_state) + 1) % 4
+	actual_state = next_state_value as TurnState
+	turn_changed.emit()
+	pass
 
 func pass_turn() -> void:
 	pass
@@ -44,10 +51,12 @@ func set_actual_state(state: int) -> void:
 
 func label_state() -> String:
 	match(actual_state):
+		TurnState.ADD:
+			return "ADD"
 		TurnState.ATTACK:
 			return "ATTACK"
-		TurnState.MOBILIZING:
-			return "MOBILIZING"
+		TurnState.MOBILIZE:
+			return "MOBILIZE"
 		TurnState.AWAIT:
 			return "AWAIT"
 		_:

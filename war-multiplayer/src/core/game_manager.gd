@@ -7,14 +7,15 @@ class_name GameManager
 @export var players_colors: Array[Color]
 
 enum GameState{
-	ATTACK = 0, 
-	MOBILIZING = 1, 
-	AWAIT = 2,
-	ADD = 3, 
-	GIVE, 
-	ATTACKING
+	ADD = 0, 
+	ATTACK = 1, 
+	MOBILIZE = 2,
+	AWAIT = 3, 
+	MOBILIZING, 
+	ATTACKING,
+	ADDING
 	}
-var actual_state: GameState = GameState.MOBILIZING
+var actual_state: GameState = GameState.MOBILIZE
 
 var players: Array[Player]
 var current_player: int = 0
@@ -39,7 +40,7 @@ func give_card() -> void:
 
 func show_ui() -> void:
 	match(turn_manager.get_actual_state()):
-		TurnManager.TurnState.MOBILIZING:
+		TurnManager.TurnState.MOBILIZE:
 			ui_manager.show_move_troops_ui()
 
 func change_game_state(new_state: GameState) -> void:

@@ -12,5 +12,13 @@ func set_game_manager(gm: GameManager, players: Array[Player]) -> void:
 		if i is Territory:
 			i.gm = gm
 
+func get_troops_to_add(player_request: Player) -> int:
+	var troops: int = 0
+	for i in get_children():
+		var territory: Territory = i as Territory
+		if territory.color == player_request.color:
+			troops += 1
+	return troops
+
 func give_bonus() -> void:
 	pass
