@@ -13,6 +13,7 @@ var game_manager: GameManager = null
 @onready var turn_progress_bar: ProgressBar = $turn_progress_bar
 
 const state_label_text: String = "[wave connected=0]{Game State}[/wave]"
+const adding_label_text: String = "[wave connected=0]add: {amount}[/wave]"
 
 func _ready() -> void:
 	turn_manager.turn_changed.connect(change_turn)
