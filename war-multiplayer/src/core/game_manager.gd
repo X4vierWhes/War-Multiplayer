@@ -15,7 +15,7 @@ enum GameState{
 	ATTACKING,
 	ADDING
 	}
-var actual_state: GameState = GameState.MOBILIZE
+var actual_state: GameState = GameState.ADD
 
 var players: Array[Player]
 var current_player: int = 0
@@ -32,7 +32,8 @@ func _ready() -> void:
 	turn_manager.turn_changed.connect(on_turn_changed)
 
 func on_turn_changed() -> void:
-	pass
+	actual_state = turn_manager.get_actual_state()
+	print(GameState.keys()[actual_state])
 
 func give_card() -> void:
 	if cardStack.size() == 0: return 
@@ -42,6 +43,8 @@ func show_ui() -> void:
 	match(turn_manager.get_actual_state()):
 		TurnManager.TurnState.MOBILIZE:
 			ui_manager.show_move_troops_ui()
+		TurnManager.TurnState.ADD:
+			ui_manager.show_add_troops_ui()
 
 func change_game_state(new_state: GameState) -> void:
 	actual_state = new_state

@@ -32,7 +32,9 @@ func show_move_troops_ui() -> void:
 	move_troops.hide()
 
 func show_add_troops_ui() -> void:
-	pass
+	add_troops.show()
+	await game_manager.await_ui
+	add_troops.hide()
 
 func show_declare_attack_ui() -> void:
 	pass

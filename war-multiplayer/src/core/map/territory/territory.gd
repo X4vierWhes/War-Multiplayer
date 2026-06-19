@@ -34,7 +34,7 @@ func mobilize() -> void:
 	gm.set_action(self)
 	gm.change_game_state(GameManager.GameState.MOBILIZING)
 
-func give() -> void:
+func mobilizing() -> void:
 	if gm.action_territory == self:
 		print("Não pode mobilizar para si proprio")
 		gm.set_action(null)
@@ -51,22 +51,35 @@ func give() -> void:
 func attack() -> void:
 	pass
 
+func attacking() -> void:
+	pass
+
+func add() -> void:
+	pass
+
+func adding() -> void:
+	pass
+
+func awaiting() -> void:
+	pass
+
 func _take_action() -> void:
 	match(gm.get_game_state()):
 		GameManager.GameState.ATTACK:
-			print("Atacando")
+			attack()
+		GameManager.GameState.ATTACKING:
+			attacking()
 		GameManager.GameState.MOBILIZE:
 			mobilize()
 		GameManager.GameState.MOBILIZING:
-			give()
+			mobilizing()
 		GameManager.GameState.ADD:
-			return
+			add()
 		GameManager.GameState.ADDING:
-			return
+			adding()
 		GameManager.GameState.AWAIT:
-			return
-		GameManager.GameState.ATTACKING:
-			return
+			awaiting()
+
 
 func _change_army_count(amount: int) -> void:
 	var aux: int = army_number + amount

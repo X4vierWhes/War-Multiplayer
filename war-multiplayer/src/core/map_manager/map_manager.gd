@@ -1,6 +1,8 @@
 extends Node2D
 class_name MapManager
 
+@export var turn_manager: TurnManager
+
 @export var maps: Array[PackedScene]
 var regions: Array[Region] = []
 var game_manager: GameManager = null 

@@ -11,7 +11,7 @@ enum TurnState{
 	MOBILIZE = 2,
 	AWAIT = 3
 }
-var actual_state: int = TurnState.MOBILIZE
+var actual_state: int = TurnState.ADD
 var turn_timer: Timer
 @export_range(1.0, 180.0, 0.1) var timer = 45.0
 
@@ -35,10 +35,14 @@ func on_turn_timer_timeout() -> void:
 func change_turn() -> void:
 	#TODO Mudança de turno
 	print("Mudando turno")
-	var next_state_value = (int(actual_state) + 1) % 4
+	var next_state_value = (int(actual_state) + 1) % TurnState.size()
 	actual_state = next_state_value as TurnState
 	turn_changed.emit()
-	pass
+	if actual_state != TurnState.AWAIT:
+		init_timers()
+	else:
+		#TODO AWAIT LOGIC
+		print("AWAIT in TurnManager")
 
 func pass_turn() -> void:
 	pass
